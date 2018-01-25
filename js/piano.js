@@ -41,11 +41,13 @@ $(function() {
   $(window).mouseup(function() {
     mouseDownFlag = false;
   });
-  $(".key").on("touchstart", function() {
+  $(".key").on("touchstart", function(e) {
+    e.preventDefault();
     var keyid = $(this).attr("id");
     playkey(keyid);
   });
-  $(".key").on("touchend", function() {
+  $(".key").on("touchend", function(e) {
+    e.preventDefault();
     stopkey();
   });
 });
