@@ -28,24 +28,24 @@ function reconcileTouches(currentTouches) {
   // stop playing any keys not currently pressed
   touchKeysPlaying.forEach(function(value, key) {
     var found = false;
-    currentTouches.forEach(function(item, index, array) {
-      if(Number(item.target.id) == key) {
+    for(var i = 0; i < currentTouches.length; i++) {
+      if(Number(currentTouches[i].target.id) == key) {
         found = true;
       }
-    });
+    }
     if(!found) {
       value.stop(audioContext.currentTime);
       touchKeysPlaying.delete(key);
     }
   });
   // start playing new pressed keys
-  currentTouches.forEach(function(item, index, array) {
-    var keyid = Number(item.target.id);
+  for(var i = 0; i < currentTouches.length; i++) {
+    var keyid = Number(currentTouches[i].target.id);
     if(!touchKeysPlaying.has(keyid)) {
       var newOsc = setupOscillator(keyid);
       touchKeysPlaying.set(keyid, newOsc);
     }
-  });
+  }
 }
 
 $(function() {
